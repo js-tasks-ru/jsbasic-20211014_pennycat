@@ -21,6 +21,7 @@ export default class RibbonMenu {
     this.toLeft.addEventListener('click', this.left);
     this.toRight.addEventListener('click', this.right);
     this.elem.addEventListener('click', this.choose);
+    this.ribbonInner.addEventListener('scroll',this.updateBtns);
   }
   addLinks(categories){
     let result = categories.map(item => `<a href="#" class="ribbon__item" data-id="${item.id}">${item.name}</a>`).join('');
@@ -29,14 +30,12 @@ export default class RibbonMenu {
   left = (event) => {
     console.log('to left');
     this.ribbonInner.scrollBy(-350, 0);
-    this.updateBtns();
   }
   right = (event) => {
     console.log('to right');
     this.ribbonInner.scrollBy(350, 0);
-    this.updateBtns();
   }
-  updateBtns(){
+  updateBtns = (event) => {
     this.ribbonInner.scrollLeft == 0 ? this.toLeft.classList.remove('ribbon__arrow_visible') : this.toLeft.classList.add('ribbon__arrow_visible')
     
     let scrollWidth = this.ribbonInner.scrollWidth;
