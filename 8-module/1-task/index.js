@@ -21,8 +21,6 @@ export default class CartIcon {
           <span class="cart-icon__price">€${cart.getTotalPrice().toFixed(2)}</span>
         </div>`;
 
-      this.firstPosition = this.elem.getBoundingClientRect().top + window.pageYOffset; 
-
       this.updatePosition();
 
       this.elem.classList.add('shake');
@@ -52,12 +50,14 @@ export default class CartIcon {
 
       let leftIndent = Math.min(container_coords.right + 20,rightIndent);
 
-      if(window.pageYOffset > this.firstPosition){
+      if(cart.getBoundingClientRect().top <= 0){
         cart.style.position = 'fixed';
         cart.style.zIndex = '2000';
         cart.style.top = '50px';
         cart.style.left = `${leftIndent}px` ;
-      } else {
+      } 
+      
+      if(window.pageYOffset == 0){
         cart.style.position = '';
         cart.style.zIndex = '';
         cart.style.left = '';
